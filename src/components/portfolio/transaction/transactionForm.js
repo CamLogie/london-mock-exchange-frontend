@@ -10,7 +10,7 @@ export default class TransactionForm extends Component {
       trade_date: null,
       close_out_date: null,
       buy_price: null,
-      sell_price: null
+      sell_price: null,
     }
   }
 
