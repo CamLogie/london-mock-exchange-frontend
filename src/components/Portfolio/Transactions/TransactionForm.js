@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import TickerInputField from './TickerInputField'
 
 export default class TransactionForm extends Component {
   constructor(props){
@@ -13,6 +14,7 @@ export default class TransactionForm extends Component {
       buy_price: '',
       sell_price: '',
       net_earnings: '', 
+      tickerNames: []
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -21,6 +23,11 @@ export default class TransactionForm extends Component {
     this.fetchTradeClosingPrice = this.fetchTradeClosingPrice.bind(this)
     this.calculateNetEarnings = this.calculateNetEarnings.bind(this)
     this.postTransaction = this.postTransaction.bind(this)
+    this.fetchTickerNames = this.fetchTickerNames.bind(this)
+  }
+
+  componentDidMount(){
+    this.fetchTickerNames()
   }
 
   fetchTradeOpeningPrice(){
@@ -52,6 +59,27 @@ export default class TransactionForm extends Component {
       })
     })
     .then(this.fetchTradeOpeningPrice)
+  }
+
+  fetchTickerNames(){
+    // use axios
+    fetch(`http://api.marketstack.com/v1/exchanges/xlon/tickers?access_key=91d577810f3fc6e82c81f62723d07a45`)
+    .then(response => {
+      console.log(response);
+      if (!response.ok) {
+        throw Error('ERROR');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // this.setState - update 
+      data.data.tickers.map(user => {
+        this.state.tickerNames.push(`${user.symbol}`)
+      })
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }
 
   calculateNetEarnings(){
@@ -100,20 +128,7 @@ export default class TransactionForm extends Component {
       <div class="container">
         <form class="form-horizontal" onSubmit={this.handleSubmit}>
         <h2>Transaction</h2>
-          <div class="form-group row">
-            <label for="firstName" class="col-sm-3 control-label">Ticker</label>
-            <div class="col-sm-9">
-              <input
-                class="form-control"
-                type="text"
-                name="ticker"
-                placeholder="Ticker"
-                value={this.state.ticker}
-                onChange={this.handleChange}
-                required
-              />
-            </div>
-          </div>
+          <TickerInputField suggestions={this.state.tickerNames}/>
 
           <div class="form-group row">
             <label for="firstName" class="col-sm-3 control-label">Number of Shares</label>
