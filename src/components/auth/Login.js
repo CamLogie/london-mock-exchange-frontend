@@ -57,7 +57,7 @@ export default class Login extends Component {
                   value={this.state.username} 
                   onChange={this.handleChange} 
                   required 
-                  autofocus
+                  autoFocus
                 />
               </div>
              </div> 
@@ -74,7 +74,7 @@ export default class Login extends Component {
                   value={this.state.password} 
                   onChange={this.handleChange} 
                   required 
-                  autofocus
+                  autoFocus
                 /> 
               </div>
             </div>

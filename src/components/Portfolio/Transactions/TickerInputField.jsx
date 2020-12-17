@@ -24,6 +24,7 @@ export default class TickerInputField extends Component {
   onChange = e => {
     const suggestions  = this.props.suggestions;
     const userInput = e.currentTarget.value;
+    this.props.updateTickerState(userInput)
     const filteredSuggestions = suggestions.filter(
       suggestion =>
         suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
@@ -43,6 +44,7 @@ export default class TickerInputField extends Component {
       showSuggestions: false,
       userInput: e.currentTarget.innerText
     });
+    this.props.updateTickerState(this.state.userInput)
   };
 
   onKeyDown = e => {

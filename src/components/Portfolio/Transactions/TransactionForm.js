@@ -24,6 +24,7 @@ export default class TransactionForm extends Component {
     this.calculateNetEarnings = this.calculateNetEarnings.bind(this)
     this.postTransaction = this.postTransaction.bind(this)
     this.fetchTickerNames = this.fetchTickerNames.bind(this)
+    this.updateTickerState = this.updateTickerState.bind(this)
   }
 
   componentDidMount(){
@@ -46,6 +47,7 @@ export default class TransactionForm extends Component {
   }
 
   fetchTradeClosingPrice(){
+    console.log('Ticker state', this.state.ticker)
     let baseUrl = 'http://api.marketstack.com/'
     let accessKey = '91d577810f3fc6e82c81f62723d07a45'
     let ticker = this.state.ticker
@@ -72,7 +74,6 @@ export default class TransactionForm extends Component {
       return response.json();
     })
     .then(data => {
-      // this.setState - update 
       data.data.tickers.map(user => {
         this.state.tickerNames.push(`${user.symbol}`)
       })
@@ -123,12 +124,18 @@ export default class TransactionForm extends Component {
     event.preventDefault();
   }
 
+  updateTickerState(fieldInput){
+    this.setState({
+      ticker: fieldInput
+    })
+  }
+
   render(){
     return (
       <div class="container">
         <form class="form-horizontal" onSubmit={this.handleSubmit}>
         <h2>Transaction</h2>
-          <TickerInputField suggestions={this.state.tickerNames}/>
+          <TickerInputField updateTickerState={this.updateTickerState} suggestions={this.state.tickerNames}/>
 
           <div class="form-group row">
             <label for="firstName" class="col-sm-3 control-label">Number of Shares</label>
