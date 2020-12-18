@@ -27,7 +27,7 @@ $ npm start
 ```
 $ npm run deploy
 ```
-Then visit: http://londonmockexchange.surge.sh/
+8. Then visit: http://londonmockexchange.surge.sh/
 
 ## Technologies Used
 - React
