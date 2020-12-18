@@ -1,5 +1,16 @@
 # London Mock Exchange Frontend
-This is a frontend static react webpage application for mock investments, made in conjunction with [this backend London Mock Exchange API](https://github.com/arabellaknowles/london-mock-exchange-backend). This app provides a user interface for signing up, in and out, for creating porfolios, listing portfolios and deleting portfolios, for creating transactions within these portolfolios and displaying a newsfeed of current financial articles. 
+This is a frontend static react webpage application for mock investments, made in conjunction with [this backend London Mock Exchange API](https://github.com/arabellaknowles/london-mock-exchange-backend).  
+
+This app provides a user interface for:
+- user registration  
+- logging in  
+- logging out  
+- Creating a portfolio  
+- Listing portfolios  
+- Deleting portfolios  
+- Creating transactions  
+- Listing transactions  
+- Displaying a newsfeed of current financial articles  
 
 ## Set up
 1) Ensure you have npm installed
